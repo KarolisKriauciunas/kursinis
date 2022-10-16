@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +37,9 @@ public class User {
     private Float salary;
     @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
     private List<Trip> trips = new ArrayList<>();
-    @OneToOne(mappedBy = "assignedId", cascade = CascadeType.ALL)
-    private Vehicle vehicle;
-    @Column(name = "ACCOUNT_TYPE", columnDefinition = "bigint default 0")
+    @OneToMany(mappedBy = "assignedId", cascade = CascadeType.ALL)
+    private List<Vehicle> vehicle;
+    @Column(name = "ACCOUNT_TYPE", columnDefinition = "bigint default 0", nullable = false)
     private AccountType Type;
 
 }

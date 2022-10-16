@@ -10,10 +10,10 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 public class TripResponse {
-    private User Driver;
+    private Long driverId;
     private Timestamp tripStartDate;
     private Timestamp tripEndDate;
     private String destination;
-    private Long tripID;
-    private Cargo merchandiseID;
+    private Long tripId;
+    private Long cargoId;
 }

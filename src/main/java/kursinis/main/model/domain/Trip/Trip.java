@@ -32,6 +32,4 @@ public class Trip {
     private Cargo merchandiseID;
     @OneToMany (mappedBy = "tripID",cascade = CascadeType.ALL)
     private List<TripStop> tripStopList = new ArrayList<>();
-
-
 }

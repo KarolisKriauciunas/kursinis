@@ -8,13 +8,15 @@ import kursinis.main.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TripService {
     private final CargoService cargoService;
     private final UserService userService;
-    TripRepository tripRepository;
+    private final TripRepository tripRepository;
 
     @Autowired
     TripService(TripRepository tripRepository, CargoService cargoService, UserService userService)
@@ -23,22 +25,32 @@ public class TripService {
         this.cargoService = cargoService;
         this.userService = userService;
     }
+
+    public void updateTrip(Long id, String description, String endDate) {
+        Trip trip = fetchTrip(id);
+        if(description != null)trip.setDestination(description);
+        if(endDate != null)trip.setTripEndDate(Timestamp.valueOf(endDate));
+        tripRepository.save(trip);
+    }
+
     public List<Trip> fetchTrips(Long TripId) {
         if(TripId != null)return tripRepository.findAllByTripID(TripId);
         return tripRepository.findAll();
     }
+    public Trip fetchTrip(Long TripId) {
+        return tripRepository.findTripByTripID(TripId);
+    }
     public List<Trip> fetchDriverTrips(Long driverId) {
-        if(driverId != null)return tripRepository.findAllByDriver(driverId);
         return tripRepository.findAll();
     }
     public Trip createTrip(TripRequest request) {
-        User user = userService.fetchUser(request.getDriverID());
+        Optional<User> user = userService.fetchUser(request.getDriverID());
         Cargo cargo = cargoService.fetchCargo(request.getMerchandiseID());
         Trip trip = Trip.builder()
-                .driver(user)
+                .driver(user.get())
                 .destination(request.getDestination())
-                .tripStartDate(null)
-                .tripEndDate(null)
+                .tripStartDate(request.getTripStartDate())
+                .tripEndDate(request.getTripEndDate())
                 .merchandiseID(cargo)
                 .build();
 
