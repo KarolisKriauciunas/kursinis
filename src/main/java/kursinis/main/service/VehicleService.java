@@ -1,6 +1,6 @@
 package kursinis.main.service;
 
-import kursinis.main.model.api.VehicleRequest;
+import kursinis.main.model.api.Vehicle.VehicleRequest;
 import kursinis.main.model.domain.Account.User;
 import kursinis.main.model.domain.Vehicle;
 import kursinis.main.repository.VehicleRepository;

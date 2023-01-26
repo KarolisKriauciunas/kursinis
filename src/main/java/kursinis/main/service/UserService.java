@@ -1,6 +1,7 @@
 package kursinis.main.service;
 
-import kursinis.main.model.api.CreateUserRequest;
+import kursinis.main.model.api.User.CreateUserRequest;
+import kursinis.main.model.domain.Account.AccountType;
 import kursinis.main.model.domain.Account.User;
 import kursinis.main.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class UserService {
                 .salary(request.getSalary())
                 .userName(request.getUserName())
                 .Type(request.getType())
+                .Email(request.getEmail())
                 .build();
 
         return userRepository.save(user);
@@ -41,7 +43,7 @@ public class UserService {
     public void deleteUser(Long userID){
         userRepository.deleteById(userID);
     }
-    public void updateUser(Long id, String name, String lastName, String password, String userName, Float salary) {
+    public void updateUser(Long id, String name, String lastName, String password, String userName, Float salary, AccountType type, String email) {
 
         Optional<User> user = fetchUser(id);
         if(user.isPresent()) {
@@ -50,7 +52,14 @@ public class UserService {
             if (password != null) user.get().setPassword(password);
             if (userName != null) user.get().setUserName(userName);
             if (salary != null)user.get().setSalary(salary);
+            if (type != null)user.get().setType(type);
+            if (email != null)user.get().setEmail(email);
             userRepository.save(user.get());
         }
+    }
+
+    public Optional <User> validateUser(String userName, String password)
+    {
+        return userRepository.findByUserNameAndPassword(userName, password);
     }
 }

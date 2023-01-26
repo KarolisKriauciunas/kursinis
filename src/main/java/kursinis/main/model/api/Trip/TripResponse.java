@@ -1,4 +1,4 @@
-package kursinis.main.model.api;
+package kursinis.main.model.api.Trip;
 
 import kursinis.main.model.domain.Account.User;
 import kursinis.main.model.domain.Trip.Cargo;

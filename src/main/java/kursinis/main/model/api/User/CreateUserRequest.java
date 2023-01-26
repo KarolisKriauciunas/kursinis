@@ -1,4 +1,4 @@
-package kursinis.main.model.api;
+package kursinis.main.model.api.User;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import kursinis.main.model.domain.Account.AccountType;
@@ -28,6 +28,8 @@ public class CreateUserRequest {
     @NotNull
     @Schema(description = "Accounts username", example = "Admin")
     private String userName;
+    @Schema(description = "email", example = "asnoriudirbti@dirbu.lt")
+    private String email;
 
     @Schema(description = "account type", example = "0")
     private AccountType type;

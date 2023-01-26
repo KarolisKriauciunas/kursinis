@@ -1,4 +1,4 @@
-package kursinis.main.model.api;
+package kursinis.main.model.api.User;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import kursinis.main.model.domain.Account.AccountType;
@@ -21,5 +21,11 @@ public class UserResponse {
     private float salary;
     private Long employeeID;
     private AccountType type;
+    private String email;
 
+    public UserResponse(String userName, Long employeeID, AccountType type) {
+        this.userName = userName;
+        this.employeeID = employeeID;
+        this.type = type;
+    }
 }

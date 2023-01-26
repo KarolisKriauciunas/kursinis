@@ -1,4 +1,4 @@
-package kursinis.main.model.api;
+package kursinis.main.model.api.Vehicle;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import kursinis.main.model.domain.VehicleType;

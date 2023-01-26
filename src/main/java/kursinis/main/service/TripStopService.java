@@ -1,6 +1,6 @@
 package kursinis.main.service;
 
-import kursinis.main.model.api.TripStopRequest;
+import kursinis.main.model.api.TripStop.TripStopRequest;
 import kursinis.main.model.domain.Trip.Trip;
 import kursinis.main.model.domain.Trip.TripStop;
 import kursinis.main.repository.TripStopRepository;

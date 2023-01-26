@@ -1,6 +1,6 @@
 package kursinis.main.service;
 
-import kursinis.main.model.api.CargoRequest;
+import kursinis.main.model.api.Cargo.CargoRequest;
 import kursinis.main.model.domain.Trip.Cargo;
 import kursinis.main.repository.CargoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

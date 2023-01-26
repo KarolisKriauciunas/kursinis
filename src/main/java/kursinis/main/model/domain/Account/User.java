@@ -29,6 +29,7 @@ public class User {
     private String firstName;
     @Column(name = "LAST_NAME")
     private String lastName;
+    private String Email;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "EMPLOYEE_ID")

@@ -24,10 +24,11 @@ public class Trip {
     private Timestamp tripStartDate;
     private Timestamp tripEndDate;
     private String destination;
+    private TripStatus status;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long tripID;
-    @OneToOne()
+    @OneToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "Cargo_id", nullable = false)
     private Cargo merchandiseID;
     @OneToMany (mappedBy = "tripID",cascade = CascadeType.ALL)

@@ -1,6 +1,6 @@
 package kursinis.main.service;
 
-import kursinis.main.model.api.TripRequest;
+import kursinis.main.model.api.Trip.TripRequest;
 import kursinis.main.model.domain.Account.User;
 import kursinis.main.model.domain.Trip.Cargo;
 import kursinis.main.model.domain.Trip.Trip;
