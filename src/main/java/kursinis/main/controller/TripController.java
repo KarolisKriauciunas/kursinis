@@ -50,7 +50,7 @@ public class TripController {
     public List<TripResponse> fetchTrips(@RequestParam(required = false) Long tripId) {
         return tripService.fetchTrips(tripId).stream()
                 .map(p -> new TripResponse(p.getDriver().getEmployeeID(), p.getTripStartDate(),
-                        p.getTripEndDate(), p.getDestination(), p.getTripID(), p.getMerchandiseID().getId()))
+                        p.getTripEndDate(), p.getDestination(), p.getTripID(), p.getMerchandiseID().getId(),p.getStatus()))
                 .collect(Collectors.toList());
     }
     @GetMapping(value = "/{driverID}/trips")
@@ -61,7 +61,7 @@ public class TripController {
 
         return temp.stream()
                 .map(p -> new TripResponse(p.getDriver().getEmployeeID(), p.getTripStartDate(),
-                        p.getTripEndDate(), p.getDestination(), p.getTripID(), p.getMerchandiseID().getId()))
+                        p.getTripEndDate(), p.getDestination(), p.getTripID(), p.getMerchandiseID().getId(),p.getStatus()))
                 .collect(Collectors.toList());
     }
     @DeleteMapping(value = "/trips/{tripId}")

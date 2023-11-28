@@ -1,5 +1,6 @@
 package kursinis.main.model.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import kursinis.main.model.domain.Account.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

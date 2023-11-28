@@ -1,6 +1,7 @@
 package kursinis.main.model.api.Trip;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import kursinis.main.model.domain.Trip.TripStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -21,4 +22,6 @@ public class TripRequest {
     private Long merchandiseID;
     @Schema(description = "trip ID")
     private Long tripID;
+    @Schema(description = "trip status", example = "FREE")
+    private TripStatus status;
 }

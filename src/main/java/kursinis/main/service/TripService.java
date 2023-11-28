@@ -41,7 +41,7 @@ public class TripService {
         return tripRepository.findTripByTripID(TripId);
     }
     public List<Trip> fetchDriverTrips(Long driverId) {
-        return tripRepository.findAll();
+        return tripRepository.findAll().stream().filter(trip -> trip.getDriver().getEmployeeID().equals(driverId)).toList();
     }
     public Trip createTrip(TripRequest request) {
         Optional<User> user = userService.fetchUser(request.getDriverID());
@@ -52,6 +52,7 @@ public class TripService {
                 .tripStartDate(request.getTripStartDate())
                 .tripEndDate(request.getTripEndDate())
                 .merchandiseID(cargo)
+                .status(request.getStatus())
                 .build();
 
         return tripRepository.save(trip);
