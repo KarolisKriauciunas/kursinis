@@ -13,7 +13,7 @@ public class VehicleRequest {
     @Schema()
     private String creationYear;
     @Schema()
-    private Float Value;
+    private String Value;
     @Schema()
     private Long completedTrips;
     @Schema(description = "Vehicle type", example = "0")

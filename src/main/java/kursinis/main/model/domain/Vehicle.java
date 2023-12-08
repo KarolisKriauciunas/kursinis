@@ -21,10 +21,11 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long vehicleID;
     private String creationYear;
-    private Float Value;
+    private String Value;
     private Long completedTrips;
     @Column(name = "TYPE", columnDefinition = "bigint default 0", nullable = false)
     private VehicleType type;
+    //numeriai masinos
     private String lastService;
     @ManyToOne
     @JoinColumn(name = "assignedID")
