@@ -9,19 +9,11 @@ import lombok.Data;
 @AllArgsConstructor
 public class VehicleResponse {
     @Schema()
-    private String manufacturer;
+    private String carName;
     @Schema()
     private Long vehicleID;
     @Schema()
-    private String creationYear;
-    @Schema()
-    private String Value;
-    @Schema()
-    private Long completedTrips;
-    @Schema()
-    private VehicleType type;
-    @Schema()
-    private String lastService;
+    private String plateNumbers;
     @Schema()
     private Long assignedId;
 }

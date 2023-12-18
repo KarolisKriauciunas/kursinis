@@ -16,17 +16,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vehicle {
-    private String manufacturer;
+    private String carName;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long vehicleID;
-    private String creationYear;
-    private String Value;
-    private Long completedTrips;
-    @Column(name = "TYPE", columnDefinition = "bigint default 0", nullable = false)
-    private VehicleType type;
-    //numeriai masinos
-    private String lastService;
+    private String plateNumbers;
     @ManyToOne
     @JoinColumn(name = "assignedID")
     private User assignedId;

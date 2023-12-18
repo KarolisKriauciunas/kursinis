@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/api/v1")
+@RequestMapping(path = "/api/v1/vehicle")
 public class VehicleController {
     private final VehicleService vehicleService;
 
@@ -24,7 +24,7 @@ public class VehicleController {
     public VehicleController(VehicleService vehicleService) {
         this.vehicleService = vehicleService;
     }
-    @PostMapping(path = "/createvehicle")
+    @PostMapping(path = "/create")
     @Operation(summary = "Create Vehicle in DB")
     @ApiResponse(
             responseCode = "201",
@@ -34,22 +34,22 @@ public class VehicleController {
     public Long createVehicle(@Validated @RequestBody VehicleRequest request) {
         return vehicleService.createVehicle(request).getVehicleID();
     }
-    @GetMapping(value = "/vehicles")
+    @GetMapping()
     @Operation(summary = "Get specific Vehicle by VehicleID or all if no ID provided")
     public List<VehicleResponse> fetchVehicles(@RequestParam(required = false) Long vehicleID) {
         return vehicleService.fetchVehicles(vehicleID).stream()
-                .map(p -> new VehicleResponse(p.getManufacturer(),p.getVehicleID(),p.getCreationYear(),p.getValue(),p.getCompletedTrips(),p.getType(),p.getLastService(),p.getAssignedId().getEmployeeID()))
+                .map(p -> new VehicleResponse(p.getCarName(),p.getVehicleID(), p.getPlateNumbers(),p.getAssignedId().getEmployeeID()))
                 .collect(Collectors.toList());
     }
-    @GetMapping(value = "/{manufacturer}/vehicles")
-    @Operation(summary = "Get specific manufacturer vehicles")
-    public List<VehicleResponse> fetchVehicles(@PathVariable String manufacturer) {
-        return vehicleService.fetchSpecificManufacturerVehicles(manufacturer).stream()
-                .map(p -> new VehicleResponse(p.getManufacturer(),p.getVehicleID(),p.getCreationYear(),p.getValue(),p.getCompletedTrips(),p.getType(),p.getLastService(),p.getAssignedId().getEmployeeID()))
+    @GetMapping(value = "/user")
+    @Operation(summary = "Get user vehicles")
+    public List<VehicleResponse> fetchUserVehicles(@RequestParam Long userId) {
+        return vehicleService.fetchUserVehicles(userId).stream()
+                .map(p -> new VehicleResponse(p.getCarName(),p.getVehicleID(),p.getPlateNumbers(),p.getAssignedId().getEmployeeID()))
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping(value = "/vehicle/{vehicleID}")
+    @DeleteMapping(value = "/{vehicleID}")
     @Operation(summary = "Delete Vehicle from database")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long vehicleID){
         vehicleService.deleteVehicle(vehicleID);
