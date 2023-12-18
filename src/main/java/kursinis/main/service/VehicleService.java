@@ -33,7 +33,7 @@ public class VehicleService {
     public List<Vehicle> fetchUserVehicles(Long userId) {
         return vehicleRepository.findAll()
                 .stream()
-                .filter(vehicle -> userId.equals(vehicle.getAssignedId().getEmployeeID()))
+                .filter(vehicle -> userId.equals(vehicle.getAssignedId().getUserId()))
                 .toList();
     }
 

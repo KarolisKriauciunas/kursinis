@@ -17,15 +17,7 @@ public class UserResponse {
     private String password;
     @Schema(description = "Users account name", example = "admin")
     private String userName;
-    @Schema(description = "Users salary", example = "1250")
-    private float salary;
     private Long employeeID;
     private AccountType type;
     private String email;
-
-    public UserResponse(String userName, Long employeeID, AccountType type) {
-        this.userName = userName;
-        this.employeeID = employeeID;
-        this.type = type;
-    }
 }

@@ -38,14 +38,14 @@ public class VehicleController {
     @Operation(summary = "Get specific Vehicle by VehicleID or all if no ID provided")
     public List<VehicleResponse> fetchVehicles(@RequestParam(required = false) Long vehicleID) {
         return vehicleService.fetchVehicles(vehicleID).stream()
-                .map(p -> new VehicleResponse(p.getCarName(),p.getVehicleID(), p.getPlateNumbers(),p.getAssignedId().getEmployeeID()))
+                .map(p -> new VehicleResponse(p.getCarName(),p.getVehicleID(), p.getPlateNumbers(),p.getAssignedId().getUserId()))
                 .collect(Collectors.toList());
     }
     @GetMapping(value = "/user")
     @Operation(summary = "Get user vehicles")
     public List<VehicleResponse> fetchUserVehicles(@RequestParam Long userId) {
         return vehicleService.fetchUserVehicles(userId).stream()
-                .map(p -> new VehicleResponse(p.getCarName(),p.getVehicleID(),p.getPlateNumbers(),p.getAssignedId().getEmployeeID()))
+                .map(p -> new VehicleResponse(p.getCarName(),p.getVehicleID(),p.getPlateNumbers(),p.getAssignedId().getUserId()))
                 .collect(Collectors.toList());
     }
 

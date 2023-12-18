@@ -23,9 +23,6 @@ public class CreateUserRequest {
     @Schema(description = "User Password", example = "Test1")
     private String password;
     @NotNull
-    @Schema(description = "Employee salary", example = "1200")
-    private float salary;
-    @NotNull
     @Schema(description = "Accounts username", example = "Admin")
     private String userName;
     @Schema(description = "email", example = "asnoriudirbti@dirbu.lt")
@@ -33,8 +30,4 @@ public class CreateUserRequest {
 
     @Schema(description = "account type", example = "0")
     private AccountType type;
-    @Schema(description = "ID", example = "ds")
-    private Long ID;
-
-
 }
