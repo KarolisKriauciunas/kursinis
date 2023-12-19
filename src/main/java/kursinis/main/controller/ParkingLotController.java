@@ -4,16 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import kursinis.main.model.api.Trip.ParkingLotRequest;
-import kursinis.main.model.api.Trip.ParkingLotResponse;
-import kursinis.main.model.api.TripStop.ParkingSpaceResponse;
+import kursinis.main.model.api.ParkingLot.ParkingLotRequest;
+import kursinis.main.model.api.ParkingLot.ParkingLotResponse;
 import kursinis.main.service.ParkingLotService;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor

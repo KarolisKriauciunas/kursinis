@@ -1,8 +1,8 @@
 package kursinis.main.model.domain;
 
 import kursinis.main.model.domain.Account.User;
-import kursinis.main.model.domain.Trip.ParkingSpace;
-import kursinis.main.model.domain.Trip.ReservationStatus;
+import kursinis.main.model.domain.Parking.ParkingSpace;
+import kursinis.main.model.domain.Parking.ReservationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

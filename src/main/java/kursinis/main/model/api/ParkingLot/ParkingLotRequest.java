@@ -1,12 +1,9 @@
-package kursinis.main.model.api.Trip;
+package kursinis.main.model.api.ParkingLot;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import kursinis.main.model.domain.Trip.City;
-import kursinis.main.model.domain.Trip.ReservationStatus;
+import kursinis.main.model.domain.Parking.City;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.sql.Timestamp;
 
 @Data
 @AllArgsConstructor

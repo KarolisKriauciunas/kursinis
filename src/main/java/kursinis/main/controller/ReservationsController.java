@@ -1,18 +1,19 @@
 package kursinis.main.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import kursinis.main.model.api.ReservationRequest;
-import kursinis.main.model.api.ReservationResponse;
-import kursinis.main.model.api.TripStop.ParkingSpaceResponse;
+import kursinis.main.model.api.Reservation.ReservationRequest;
+import kursinis.main.model.api.Reservation.ReservationResponse;
+import kursinis.main.model.domain.Parking.ReservationStatus;
 import kursinis.main.service.ReservationsService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -30,10 +31,17 @@ public class ReservationsController {
         return service.createReservation(request).getReservationId();
     }
 
+    @PutMapping("/update/reservation/{id}")
+    @Operation(summary = "Update reservation info in database")
+    ResponseEntity<Void> editReservation(@PathVariable Long id, ReservationStatus status) {
+        service.updateReservation(id, status);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping()
     public List<ReservationResponse> fetchReservations() {
         return service.fetchAllReservations().stream()
-                .map(p -> new ReservationResponse(p.getReservationStartDate(), p.getReservationEndDate(), p.getParkingSpaceId().getParkingSpaceId(), p.getUserId().getUserId(), p.getReservationStatus()))
+                .map(p -> new ReservationResponse(p.getReservationId(), p.getReservationStartDate(), p.getReservationEndDate(), p.getParkingSpaceId().getParkingSpaceId(), p.getUserId().getUserId(), p.getReservationStatus()))
                 .toList();
     }
 }

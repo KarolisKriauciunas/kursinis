@@ -1,10 +1,10 @@
 package kursinis.main.service;
 
-import kursinis.main.model.api.ReservationRequest;
+import kursinis.main.model.api.Reservation.ReservationRequest;
 import kursinis.main.model.domain.Account.User;
 import kursinis.main.model.domain.Reservation;
-import kursinis.main.model.domain.Trip.ParkingSpace;
-import kursinis.main.model.domain.Trip.ReservationStatus;
+import kursinis.main.model.domain.Parking.ParkingSpace;
+import kursinis.main.model.domain.Parking.ReservationStatus;
 import kursinis.main.repository.ReservationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,6 +26,10 @@ public class ReservationsService {
         return repository.findAll();
     }
 
+    public Optional<Reservation> fetchReservation(Long id) {
+        return repository.findById(id);
+    }
+
     public Reservation createReservation(ReservationRequest request) {
         Optional<ParkingSpace> parkingSpace = parkingSpaceService.fetchParkingSpace(request.getParkingSpaceId());
         Optional<User> user = userService.fetchUser(request.getUserId());
@@ -41,6 +45,14 @@ public class ReservationsService {
         }
 
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Provided information is faulty");
+    }
+    public void updateReservation(Long id, ReservationStatus status) {
+
+        Optional<Reservation> reservation = fetchReservation(id);
+        if (reservation.isPresent()) {
+            if (status != null) reservation.get().setReservationStatus(status);
+            repository.save(reservation.get());
+        }
     }
 
 }

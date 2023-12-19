@@ -1,4 +1,4 @@
-package kursinis.main.model.api.TripStop;
+package kursinis.main.model.api.ParkingSpace;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

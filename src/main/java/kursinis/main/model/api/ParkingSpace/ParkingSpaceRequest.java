@@ -1,4 +1,4 @@
-package kursinis.main.model.api.TripStop;
+package kursinis.main.model.api.ParkingSpace;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
