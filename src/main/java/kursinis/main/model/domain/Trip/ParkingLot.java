@@ -20,7 +20,7 @@ public class ParkingLot {
     private City city;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long parkingLotId;
 
     @OneToMany(mappedBy = "parkingSpaceId",cascade = CascadeType.ALL)
