@@ -12,6 +12,7 @@ import java.sql.Date;
 @Builder
 @AllArgsConstructor
 public class ReservationResponse {
+    private Long reservationId;
     private Date reservationStartDate;
     private Date reservationEndDate;
     private String parkingSpaceName;

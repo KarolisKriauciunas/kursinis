@@ -1,13 +1,16 @@
 package kursinis.main.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import kursinis.main.model.api.ReservationRequest;
 import kursinis.main.model.api.ReservationResponse;
 import kursinis.main.model.api.TripStop.ParkingSpaceResponse;
+import kursinis.main.model.domain.Trip.ReservationStatus;
 import kursinis.main.service.ReservationsService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,5 +36,12 @@ public class ReservationsController {
     @GetMapping()
     public List<ReservationResponse> fetchReservations() {
         return service.fetchAllReservations();
+    }
+
+    @PutMapping("/update/reservation/{id}")
+    @Operation(summary = "Update reservation info in database")
+    ResponseEntity<Void> editReservation(@PathVariable Long id, ReservationStatus status) {
+        service.updateReservation(id, status);
+        return ResponseEntity.ok().build();
     }
 }

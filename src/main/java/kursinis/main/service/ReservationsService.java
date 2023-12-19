@@ -36,6 +36,7 @@ public class ReservationsService {
             Optional<ParkingLot> parkingLot = parkingLotService.fetchParkingLot(res.getParkingSpaceId().getParkingLotID().getParkingLotId());
             reservationResponseList.add(
                     ReservationResponse.builder()
+                            .reservationId(res.getReservationId())
                             .reservationStartDate(res.getReservationStartDate())
                             .reservationEndDate(res.getReservationEndDate())
                             .userId(res.getUserId().getUserId())
@@ -48,6 +49,9 @@ public class ReservationsService {
             );
         }
         return reservationResponseList;
+    }
+    public Optional<Reservation> fetchReservation(Long id) {
+        return repository.findById(id);
     }
 
     public Reservation createReservation(ReservationRequest request) {
@@ -67,4 +71,12 @@ public class ReservationsService {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Provided information is faulty");
     }
 
+    public void updateReservation(Long id, ReservationStatus status) {
+
+        Optional<Reservation> reservation = fetchReservation(id);
+        if (reservation.isPresent()) {
+            if (status != null) reservation.get().setReservationStatus(status);
+            repository.save(reservation.get());
+        }
+    }
 }
