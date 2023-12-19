@@ -1,6 +1,6 @@
-package kursinis.main.model.api.Trip;
+package kursinis.main.model.api.ParkingLot;
 
-import kursinis.main.model.domain.Trip.City;
+import kursinis.main.model.domain.Parking.City;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

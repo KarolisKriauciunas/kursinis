@@ -1,8 +1,8 @@
 package kursinis.main.service;
 
-import kursinis.main.model.api.TripStop.ParkingSpaceRequest;
-import kursinis.main.model.domain.Trip.ParkingLot;
-import kursinis.main.model.domain.Trip.ParkingSpace;
+import kursinis.main.model.api.ParkingSpace.ParkingSpaceRequest;
+import kursinis.main.model.domain.Parking.ParkingLot;
+import kursinis.main.model.domain.Parking.ParkingSpace;
 import kursinis.main.repository.ParkingSpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

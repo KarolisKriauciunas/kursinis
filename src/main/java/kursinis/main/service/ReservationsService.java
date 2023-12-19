@@ -1,12 +1,12 @@
 package kursinis.main.service;
 
-import kursinis.main.model.api.ReservationRequest;
-import kursinis.main.model.api.ReservationResponse;
+import kursinis.main.model.api.Reservation.ReservationRequest;
+import kursinis.main.model.api.Reservation.ReservationResponse;
 import kursinis.main.model.domain.Account.User;
 import kursinis.main.model.domain.Reservation;
-import kursinis.main.model.domain.Trip.ParkingLot;
-import kursinis.main.model.domain.Trip.ParkingSpace;
-import kursinis.main.model.domain.Trip.ReservationStatus;
+import kursinis.main.model.domain.Parking.ParkingLot;
+import kursinis.main.model.domain.Parking.ParkingSpace;
+import kursinis.main.model.domain.Parking.ReservationStatus;
 import kursinis.main.repository.ReservationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

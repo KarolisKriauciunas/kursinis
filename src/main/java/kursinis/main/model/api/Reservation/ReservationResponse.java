@@ -1,7 +1,7 @@
-package kursinis.main.model.api;
+package kursinis.main.model.api.Reservation;
 
-import kursinis.main.model.domain.Trip.City;
-import kursinis.main.model.domain.Trip.ReservationStatus;
+import kursinis.main.model.domain.Parking.City;
+import kursinis.main.model.domain.Parking.ReservationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

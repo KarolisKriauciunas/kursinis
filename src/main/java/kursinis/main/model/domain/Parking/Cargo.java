@@ -1,4 +1,4 @@
-package kursinis.main.model.domain.Trip;
+package kursinis.main.model.domain.Parking;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
