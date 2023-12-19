@@ -38,14 +38,14 @@ public class UserController {
             content = @Content(schema = @Schema(implementation = Long.class))
     )
     public Long createUser(@Validated @RequestBody CreateUserRequest request) {
-        return userService.createUser(request).getEmployeeID();
+        return userService.createUser(request).getUserId();
     }
 
     @GetMapping(value = "/users")
     @Operation(summary = "Get specific User by username or all if no Username provided")
     public List<UserResponse> fetchUsers(@RequestParam(required = false) String userName) {
         return userService.fetchUsers(userName).stream()
-                .map(p -> new UserResponse(p.getFirstName(), p.getLastName(), p.getPassword(), p.getUserName(), p.getSalary(), p.getEmployeeID(), p.getType(), p.getEmail()))
+                .map(p -> new UserResponse(p.getFirstName(), p.getLastName(), p.getPassword(), p.getUserName(),p.getUserId(), p.getType(), p.getEmail()))
                 .collect(Collectors.toList());
     }
 
@@ -69,7 +69,7 @@ public class UserController {
     public ResponseEntity<?> authenticateUser(@Valid @RequestParam String userName, @RequestParam String password) {
         Optional<User> user = userService.validateUser(userName, password);
         if (user.isPresent()) {
-            return ResponseEntity.ok(new LoginResponse(user.get().getUserName(),user.get().getType(),user.get().getEmployeeID()));
+            return ResponseEntity.ok(new LoginResponse(user.get().getUserName(),user.get().getType(),user.get().getUserId()));
             }
         return ResponseEntity.badRequest().body("Invalid username or password");
     }

@@ -5,7 +5,11 @@ import kursinis.main.model.domain.Account.User;
 import kursinis.main.model.domain.Vehicle;
 import kursinis.main.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +30,11 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
-    public List<Vehicle> fetchSpecificManufacturerVehicles(String manufacturer) {
-        return vehicleRepository.findAllByManufacturer(manufacturer);
+    public List<Vehicle> fetchUserVehicles(Long userId) {
+        return vehicleRepository.findAll()
+                .stream()
+                .filter(vehicle -> userId.equals(vehicle.getAssignedId().getUserId()))
+                .toList();
     }
 
     public List<Vehicle> fetchDriverVehicles(Long driverId) {
@@ -35,15 +42,15 @@ public class VehicleService {
     }
 
     public Vehicle createVehicle(VehicleRequest request) {
+        if(fetchUserVehicles(request.getAssignedId()).size() == 2) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already has 2 vehicles registered");
+        }
+
         Optional<User> user = userService.fetchUser(request.getAssignedId());
         Vehicle vehicle = Vehicle.builder()
                 .assignedId(user.get())
-                .completedTrips(request.getCompletedTrips())
-                .creationYear(request.getCreationYear())
-                .lastService(request.getLastService())
-                .manufacturer(request.getManufacturer())
-                .type(request.getType())
-                .Value(request.getValue())
+                .plateNumbers(request.getPlateNumbers())
+                .carName(request.getCarName())
                 .build();
 
         return vehicleRepository.save(vehicle);
