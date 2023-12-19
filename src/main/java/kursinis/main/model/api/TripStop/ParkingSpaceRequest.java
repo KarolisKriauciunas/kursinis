@@ -9,6 +9,8 @@ import lombok.Data;
 public class ParkingSpaceRequest {
     @Schema(description = "Parking space name", example = "-2a. 64")
     private String name;
+    @Schema(description = "Parking space daily price", example = "1")
+    private float price;
     @Schema(description = "Parking lot id", example = "1")
     private Long parkingLotId;
 }

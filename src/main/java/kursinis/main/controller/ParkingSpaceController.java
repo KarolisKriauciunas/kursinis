@@ -4,9 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import kursinis.main.model.api.Trip.ParkingSpaceResponse;
 import kursinis.main.model.api.TripStop.ParkingSpaceRequest;
-import kursinis.main.model.domain.Trip.ParkingSpace;
+import kursinis.main.model.api.TripStop.ParkingSpaceResponse;
 import kursinis.main.service.ParkingSpaceService;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -33,11 +32,10 @@ public class ParkingSpaceController {
         return parkingSpaceService.createParkingSpace(request).getParkingSpaceId();
     }
 
-
     @GetMapping(value = "/parkingspaces")
-    public List<ParkingSpaceResponse> fetchParkingSpacesByParkingLot(@RequestParam(required = false) Long parkingLotId) {
+    public List<ParkingSpaceResponse> fetchParkingSpacesByParkingLot(@RequestParam Long parkingLotId) {
         return parkingSpaceService.fetchParkingSpacesByParkingLot(parkingLotId).stream()
-                .map(p -> new ParkingSpaceResponse(p.getParkingLotID().getParkingLotId(),p.getParkingSpaceId(),p.getName()))
+                .map(p -> new ParkingSpaceResponse(p.getParkingSpaceId(), p.getName(), p.getPrice(), p.getParkingLotID().getParkingLotId()))
                 .collect(Collectors.toList());
     }
 
