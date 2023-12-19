@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,10 @@ public class ReservationsService {
     private ReservationRepository repository;
     private ParkingSpaceService parkingSpaceService;
     private UserService userService;
+
+    public List<Reservation> fetchAllReservations() {
+        return repository.findAll();
+    }
 
     public Reservation createReservation(ReservationRequest request) {
         Optional<ParkingSpace> parkingSpace = parkingSpaceService.fetchParkingSpace(request.getParkingSpaceId());
@@ -31,7 +36,7 @@ public class ReservationsService {
                     .reservationEndDate(request.getReservationEndDate())
                     .parkingSpaceId(parkingSpace.get())
                     .userId(user.get())
-                    .status(ReservationStatus.UPCOMING)
+                    .reservationStatus(ReservationStatus.UPCOMING)
                     .build());
         }
 

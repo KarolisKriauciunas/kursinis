@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -18,9 +18,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reservation {
-    private Timestamp reservationStartDate;
-    private Timestamp reservationEndDate;
-    private ReservationStatus status;
+    private Date reservationStartDate;
+    private Date reservationEndDate;
+    private ReservationStatus reservationStatus;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
