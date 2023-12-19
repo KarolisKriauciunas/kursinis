@@ -7,6 +7,8 @@ import kursinis.main.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +37,7 @@ public class UserService {
                 .password(request.getPassword())
                 .userName(request.getUserName())
                 .Type(request.getType())
-                .Email(request.getEmail())
+                .email(request.getEmail())
                 .build();
 
         return userRepository.save(user);
@@ -59,7 +61,29 @@ public class UserService {
         }
     }
 
+    public String resetPassword(String email) {
+        String password = generateStrongPassword();
+        List<User> user = userRepository.findByEmail(email);
+        user.get(0).setPassword(password);
+        userRepository.save(user.get(0));
+        return password;
+    }
+
     public Optional<User> validateUser(String userName, String password) {
         return userRepository.findByUserNameAndPassword(userName, password);
+    }
+
+    public static String generateStrongPassword() {
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] bytes = new byte[12];
+        secureRandom.nextBytes(bytes);
+
+        String generatedPassword = Base64.getEncoder().encodeToString(bytes);
+
+        generatedPassword = generatedPassword.replaceAll("[^a-zA-Z0-9]", "");
+
+        generatedPassword = generatedPassword.substring(0, Math.min(12, generatedPassword.length()));
+
+        return generatedPassword;
     }
 }
