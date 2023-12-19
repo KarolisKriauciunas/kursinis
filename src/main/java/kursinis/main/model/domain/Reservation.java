@@ -23,7 +23,7 @@ public class Reservation {
     private ReservationStatus reservationStatus;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservationId;
 
     @ManyToOne

@@ -32,8 +32,6 @@ public class ReservationsController {
 
     @GetMapping()
     public List<ReservationResponse> fetchReservations() {
-        return service.fetchAllReservations().stream()
-                .map(p -> new ReservationResponse(p.getReservationStartDate(), p.getReservationEndDate(), p.getParkingSpaceId().getParkingSpaceId(), p.getUserId().getUserId(), p.getReservationStatus()))
-                .toList();
+        return service.fetchAllReservations();
     }
 }
