@@ -65,6 +65,12 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/reset")
+    @Operation(summary = "Update a user info in database")
+    public String resetPassword(@RequestParam String email) {
+        return userService.resetPassword(email);
+    }
+
     @GetMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestParam String userName, @RequestParam String password) {
         Optional<User> user = userService.validateUser(userName, password);
