@@ -29,4 +29,6 @@ public class ParkingSpace {
     @ManyToOne
     @JoinColumn(name = "parkingLotId")
     private ParkingLot parkingLotID;
+
+    private float price;
 }

@@ -5,10 +5,15 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import kursinis.main.model.api.Trip.ParkingLotRequest;
+import kursinis.main.model.api.Trip.ParkingLotResponse;
+import kursinis.main.model.api.TripStop.ParkingSpaceResponse;
 import kursinis.main.service.ParkingLotService;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -24,18 +29,16 @@ public class ParkingLotController {
             content = @Content(schema = @Schema(implementation = Long.class))
     )
     public Long createParkingLot(@Validated @RequestBody ParkingLotRequest request) {
-
         return parkingLotService.createParkingLot(request).getParkingLotId();
     }
-//
-//    @GetMapping(value = "/trips")
-//    @Operation(summary = "Get specific Trip by ID or all if no ID provided")
-//    public List<TripResponse> fetchTrips(@RequestParam(required = false) Long tripId) {
-//        return parkingLotService.fetchTrips(tripId).stream()
-//                .map(p -> new TripResponse(p.getDriver().getEmployeeID(), p.getTripStartDate(),
-//                        p.getTripEndDate(), p.getDestination(), p.getTripID(), p.getMerchandiseID().getId(),p.getStatus()))
-//                .collect(Collectors.toList());
-//    }
+
+    @GetMapping()
+    @Operation(summary = "Get specific Trip by ID or all if no ID provided")
+    public List<ParkingLotResponse> fetchParkingLots() {
+        return parkingLotService.fetchAllParkingLots().stream()
+                .map(p -> new ParkingLotResponse(p.getParkingLotId(), p.getCity(), p.getAddress()))
+                .toList();
+    }
 //    @GetMapping(value = "/{driverID}/trips")
 //    @Operation(summary = "Get specific Trips  that are assigned to an employee")
 //    public List<TripResponse> fetchDriverTrips(@PathVariable Long driverID) {

@@ -18,8 +18,7 @@ public class ParkingSpaceService {
     private final ParkingLotService parkingLotService;
 
     @Autowired
-    ParkingSpaceService(ParkingSpaceRepository parkingSpaceRepository, ParkingLotService parkingLotService)
-    {
+    ParkingSpaceService(ParkingSpaceRepository parkingSpaceRepository, ParkingLotService parkingLotService) {
         this.parkingLotService = parkingLotService;
         this.parkingSpaceRepository = parkingSpaceRepository;
     }
@@ -30,6 +29,7 @@ public class ParkingSpaceService {
         if (parkingLot.isPresent()) {
             return parkingSpaceRepository.save(ParkingSpace.builder()
                     .name(request.getName())
+                    .price(request.getPrice())
                     .parkingLotID(parkingLot.get())
                     .build());
         }
@@ -37,7 +37,7 @@ public class ParkingSpaceService {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such parking lot exists");
     }
 
-    public List<ParkingSpace> fetchParkingSpacesByParkingLot(Long parkingLotId){
+    public List<ParkingSpace> fetchParkingSpacesByParkingLot(Long parkingLotId) {
         return parkingSpaceRepository.findAll()
                 .stream()
                 .filter(space -> parkingLotId.equals(space.getParkingLotID().getParkingLotId()))
